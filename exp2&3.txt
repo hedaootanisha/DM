@@ -1,0 +1,82 @@
+-- Simple SQLite retail schema (enable foreign keys) -------------------
+PRAGMA foreign_keys = ON;
+
+DROP TABLE IF EXISTS fact_sales;
+DROP TABLE IF EXISTS products;
+DROP TABLE IF EXISTS customers;
+DROP TABLE IF EXISTS stores;
+
+CREATE TABLE products (
+  product_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT,
+  unit_price REAL
+);
+
+CREATE TABLE customers (
+  customer_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT
+);
+
+CREATE TABLE stores (
+  store_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT
+);
+
+-- insert parent rows first (explicit ids optional)
+INSERT INTO products (name, unit_price) VALUES
+('T-Shirt',299.00), ('Water Bottle',249.00), ('Earbuds',2499.00);
+
+INSERT INTO customers (name) VALUES
+('Ananya Patel'), ('Rahul Sharma');
+
+INSERT INTO stores (name) VALUES
+('Mumbai Central'), ('Jaipur Mall');
+
+-- now create fact table and insert sales
+CREATE TABLE fact_sales (
+  sale_id INTEGER PRIMARY KEY AUTOINCREMENT,
+  sale_date TEXT NOT NULL,
+  product_id INTEGER NOT NULL,
+  customer_id INTEGER,
+  store_id INTEGER NOT NULL,
+  quantity INTEGER NOT NULL DEFAULT 1,
+  total_amount REAL NOT NULL,
+  FOREIGN KEY (product_id) REFERENCES products(product_id),
+  FOREIGN KEY (customer_id) REFERENCES customers(customer_id),
+  FOREIGN KEY (store_id) REFERENCES stores(store_id)
+);
+
+INSERT INTO fact_sales (sale_date, product_id, customer_id, store_id, quantity, total_amount) VALUES
+('2025-12-01', 1, 1, 1, 2, 2 * 299.00),
+('2025-11-30', 2, NULL, 1, 1, 1 * 249.00),
+('2025-11-29', 3, 2, 2, 1, 1 * 2499.00);
+
+-- quick check
+SELECT f.*, p.name AS product, c.name AS customer, s.name AS store
+FROM fact_sales f
+JOIN products p ON f.product_id = p.product_id
+JOIN stores s ON f.store_id = s.store_id
+LEFT JOIN customers c ON f.customer_id = c.customer_id;
+
+
+
+✅ 1) Roll-up (manual) — totals by store + grand total (SQLite-safe)
+
+ 
+SELECT s.name AS store, SUM(f.total_amount) AS sales FROM fact_sales f JOIN stores s ON f.store_id=s.store_id GROUP BY s.store_id UNION ALL -- grand total SELECT 'GRAND TOTAL', SUM(total_amount) FROM fact_sales; 
+
+✅ 2) Drill-down — store + product (simple grouping)
+
+SELECT s.name AS store, p.name AS product, SUM(f.total_amount) AS sales FROM fact_sales f JOIN stores s ON f.store_id=s.store_id JOIN products p ON f.product_id=p.product_id GROUP BY s.store_id, p.product_id; 
+
+✅ 3) Slice — filter by date range
+
+SELECT p.name, SUM(f.quantity) AS qty, SUM(f.total_amount) AS revenue FROM fact_sales f JOIN products p ON f.product_id=p.product_id WHERE f.sale_date BETWEEN '2025-12-01' AND '2025-12-31' GROUP BY p.product_id; 
+
+✅ 4) Dice — filter multiple dimensions (store + date)
+
+SELECT p.name AS product, SUM(f.quantity) AS qty, SUM(f.total_amount) AS revenue FROM fact_sales f JOIN products p ON f.product_id=p.product_id WHERE f.store_id=1 AND f.sale_date BETWEEN '2025-11-01' AND '2025-12-31' GROUP BY p.product_id; 
+
+✅ 5) Pivot (manual case-based pivot; SQLite-friendly)
+
+SELECT s.name AS store, SUM(CASE WHEN substr(f.sale_date,6,2)='11' THEN f.total_amount ELSE 0 END) AS Nov, SUM(CASE WHEN substr(f.sale_date,6,2)='12' THEN f.total_amount ELSE 0 END) AS Dec, SUM(f.total_amount) AS total FROM fact_sales f JOIN stores s ON f.store_id=s.store_id GROUP BY s.store_id;
