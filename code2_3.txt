@@ -1,0 +1,58 @@
+PRAGMA foreign_keys = ON;
+
+DROP TABLE IF EXISTS Orders;
+DROP TABLE IF EXISTS Customers;
+
+CREATE TABLE Customers (
+  cid INTEGER PRIMARY KEY AUTOINCREMENT,
+  name TEXT
+);
+
+CREATE TABLE Orders (
+  oid INTEGER PRIMARY KEY AUTOINCREMENT,
+  order_date TEXT,
+  customer_id INTEGER,
+  amount REAL,
+  FOREIGN KEY (customer_id) REFERENCES Customers(cid)
+);
+
+INSERT INTO Customers (name) VALUES ('Asha'), ('Ravi');
+INSERT INTO Orders (customer_id, order_date, amount) VALUES (1,'2025-12-01',100),(2,'2025-12-02',200);
+
+SELECT * FROM Customers;
+SELECT * FROM Orders;
+
+
+
+SELECT c.name AS customer, substr(o.order_date,1,7) AS month, SUM(o.amount) AS sales
+FROM Orders o JOIN Customers c ON o.customer_id=c.cid
+GROUP BY c.cid, month
+UNION ALL
+SELECT c.name, 'TOTAL', SUM(o.amount)
+FROM Orders o JOIN Customers c ON o.customer_id=c.cid
+GROUP BY c.cid
+UNION ALL
+SELECT 'GRAND TOTAL', '', SUM(amount) FROM Orders;
+
+SELECT c.name, SUM(o.amount) AS total_sales
+FROM Orders o JOIN Customers c ON o.customer_id=c.cid
+GROUP BY c.cid;
+
+SELECT o.* FROM Orders o WHERE o.customer_id = 1 ORDER BY o.order_date;
+
+
+SELECT c.name,
+  SUM(CASE WHEN substr(o.order_date,6,2)='11' THEN o.amount ELSE 0 END) AS Nov,
+  SUM(CASE WHEN substr(o.order_date,6,2)='12' THEN o.amount ELSE 0 END) AS Dec,
+  SUM(o.amount) AS total
+FROM Orders o JOIN Customers c ON o.customer_id=c.cid
+GROUP BY c.cid;
+SELECT SUM(amount) AS total_sales, COUNT(*) AS txns
+FROM Orders
+WHERE order_date BETWEEN '2025-12-01' AND '2025-12-31';
+SELECT o.order_date, c.name, o.amount
+FROM Orders o JOIN Customers c ON o.customer_id=c.cid
+WHERE o.customer_id = 1
+  AND o.amount > 50
+  AND o.order_date BETWEEN '2025-11-01' AND '2025-12-31'
+ORDER BY o.order_date;
