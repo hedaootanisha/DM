@@ -1,0 +1,32 @@
+Experiment No. 08
+1. Aim:
+
+To study and implement the Apriori algorithm for association rule mining using the WEKA tool.
+
+2.Theory (Short):
+
+Apriori is a popular algorithm used for frequent itemset mining and association rule generation.
+It works by:
+
+Identifying frequently occurring attribute combinations (itemsets)
+
+Generating rules such as A → B based on support and confidence
+
+Using the Apriori property, which states:
+If an itemset is frequent, all of its subsets must also be frequent.
+
+In WEKA, Apriori is used under the Associate tab to discover meaningful patterns from discrete datasets.
+
+Procedure (Short):
+
+Open WEKA Explorer and load the dataset (e.g., test.arff).
+
+Go to the Associate tab.
+
+Choose the Apriori algorithm (default).
+
+Click on the algorithm panel to modify parameters such as minimum support, confidence, or number of rules.
+
+Click Start to generate association rules.
+
+Examine frequent itemsets and rules displayed in the output panel.
