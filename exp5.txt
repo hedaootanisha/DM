@@ -1,0 +1,84 @@
+Experiment No. 05
+
+A.1 Aim:
+
+To implement the Naïve Bayes Classification Algorithm using the WEKA Tool.
+
+
+---
+
+A.2 Prerequisite:
+
+Basic familiarity with programming concepts and WEKA interface.
+
+
+---
+
+A.3 Outcome:
+
+After completing this experiment, students will be able to:
+
+Prepare datasets for classification
+
+Apply Naïve Bayes algorithm using WEKA
+
+Analyze classification accuracy and results
+
+
+
+---
+
+A.4 Theory (Short):
+
+Naïve Bayes is a supervised classification algorithm based on Bayes’ Theorem. It assumes that features are independent of each other (naïve assumption). Despite this simplification, it works remarkably well for many real-world problems.
+
+Bayesian classification calculates the probability of each class given the input data and chooses the class with the highest posterior probability.
+
+It is widely used in:
+
+Text classification
+
+Spam filtering
+
+Recommender systems
+
+Sentiment detection
+
+
+Advantages:
+
+Works well with high-dimensional data
+
+Requires very small training data
+
+Fast and efficient classifier
+
+
+
+---
+
+Procedure (WEKA – Naïve Bayes):
+
+1. Open WEKA Explorer and load the dataset (e.g., file.arff).
+
+
+2. Click on the Classify tab.
+
+
+3. Click Choose → select NaiveBayes classifier.
+
+
+4. Select 10-fold cross validation as the evaluation method.
+
+
+5. Click Start to run the classifier.
+
+
+6. Observe the accuracy, confusion matrix, and model details in the output panel.
+
+
+7. (Optional) Right-click the result → Visualize to see plots or graphs.
+
+
+8. To classify new data, choose Supplied Test Set and load the test file.
+9.

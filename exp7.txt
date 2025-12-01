@@ -1,0 +1,37 @@
+Experiment No. 07
+✅ Aim:
+
+To demonstrate Agglomerative Hierarchical Clustering using the WEKA tool.
+
+✅ Theory (Short):
+
+Hierarchical clustering groups data into a tree-like structure.
+It has two types:
+
+Agglomerative (Bottom-Up):
+
+Starts with each data point as its own cluster.
+
+Merges the closest clusters step-by-step until one big cluster forms.
+
+Divisive (Top-Down):
+
+Starts with one cluster and keeps splitting it.
+
+Agglomerative clustering uses distance metrics (e.g., Euclidean) and forms a dendrogram, showing how clusters merge at each level.
+
+✅ Procedure (Short):
+
+Open WEKA Explorer → load dataset (.arff file).
+
+Go to Cluster tab.
+
+Choose HierarchicalClusterer.
+
+Select distance function (e.g., Euclidean) and linkage type.
+
+Set number of clusters or use default.
+
+Click Start to run clustering.
+
+View cluster results and hierarchical tree.

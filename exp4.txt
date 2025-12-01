@@ -1,0 +1,68 @@
+Experiment No. 04
+
+A.1 Aim:
+
+To implement the Decision Tree Algorithm using J-48 classifier in the WEKA tool.
+
+
+---
+
+A.2 Prerequisite:
+
+Basic knowledge of the WEKA interface and how to load datasets.
+
+
+---
+
+A.3 Outcome:
+
+After completing this experiment, students will be able to:
+
+Prepare and explore data for classification using data mining tools.
+
+Build and evaluate a decision tree model using J-48.
+
+
+
+---
+
+A.4 Theory:
+
+A decision tree is a tree-structured model where internal nodes represent attribute tests, branches represent outcomes, and leaf nodes represent class decisions. Decision trees are easy to understand, require minimal data preparation, and support both numerical and categorical data.
+
+Common decision tree algorithms include ID3, C4.5, and CART.
+
+ID3 builds trees using information gain and entropy to select the best attribute at each step.
+
+The goal is to reduce entropy until pure class nodes are reached.
+
+
+J-48 is WEKA’s implementation of the C4.5 algorithm, which supports pruning and handles missing values effectively.
+
+
+---
+
+Steps (Summary):
+
+1. Load the dataset (e.g., student.arff) into WEKA.
+
+
+2. Go to Classify → Choose → J48.
+
+
+3. Keep default parameters or modify if needed.
+
+
+4. Select 10-fold cross-validation for evaluation.
+
+
+5. Click Start to build the decision tree.
+
+
+6. View model accuracy and generated ASCII tree.
+
+
+7. Right-click result → Visualize Tree for graphical view.
+
+
+8. Use Supplied Test Set option to classify new test data.

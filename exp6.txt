@@ -1,0 +1,82 @@
+Experiment No. 06
+
+A.1 Aim:
+
+To implement K-Means Clustering using the WEKA Tool.
+
+
+---
+
+A.2 Prerequisite:
+
+Basic understanding of the WEKA interface and clustering concepts.
+
+
+---
+
+A.3 Outcome:
+
+After successful completion of this experiment, students will be able to:
+
+Apply unsupervised learning techniques
+
+Implement and analyze K-means clustering results in WEKA
+
+
+
+---
+
+A.4 Theory (Short):
+
+K-Means is a simple and widely used unsupervised clustering algorithm that groups data into k clusters based on similarity.
+The algorithm works by:
+
+1. Selecting k initial centroids
+
+
+2. Assigning each data point to the nearest centroid
+
+
+3. Recomputing new centroids as the mean of the assigned points
+
+
+4. Repeating the process until centroids stop moving
+
+
+
+It aims to minimize the distance between data points and their assigned cluster centers. K-means is efficient, scalable, and commonly used in pattern recognition, customer segmentation, and image analysis.
+
+
+---
+
+Procedure (WEKA – K-Means Clustering):
+
+1. Open WEKA Explorer and load the dataset (e.g., file.arff).
+
+
+2. Go to the Cluster tab.
+
+
+3. Click Choose → select SimpleKMeans.
+
+
+4. Set the number of clusters k (default is 2).
+
+
+5. Keep other default settings or adjust if required.
+
+
+6. Click Start to run the clustering algorithm.
+
+
+7. View the results:
+
+Cluster centroids
+
+Number of instances in each cluster
+
+Attribute distribution per cluster
+
+
+
+8. (Optional) Right-click the result → Visualize Cluster Assignments for graphical output.

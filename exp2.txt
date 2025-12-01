@@ -1,0 +1,47 @@
+Experiment No. 02
+
+A.1 Aim:
+
+To implement all dimension tables and the fact table related to the case study mentioned in Experiment 1.
+
+
+---
+
+A.4 Theory:
+
+In a data warehouse, information is organized using dimensional modeling, which consists of dimension tables and fact tables.
+
+Dimension Tables
+
+Dimension tables store descriptive attributes that provide context to measurable data. They categorize facts so users can analyze information by different perspectives such as:
+
+Time (day, month, quarter, year)
+
+Product (item name, category, brand)
+
+Customer (name, age group, location)
+
+Region/Branch (city, state, area)
+
+
+Each dimension table uses a surrogate key (system-generated key) as its primary key. This key is stored as a foreign key in the fact table.
+
+Fact Table
+
+Fact tables store quantitative, measurable data, called facts, such as:
+
+Sales amount
+
+Quantity sold
+
+Total revenue
+
+
+A fact table contains:
+
+Foreign keys referencing dimension tables
+
+Measures that represent real business metrics
+
+
+Fact tables and dimension tables together support decision-making by enabling analytical queries.

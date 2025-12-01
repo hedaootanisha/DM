@@ -1,0 +1,45 @@
+EXPERIMENT 3
+
+Title:
+
+Implementation of OLAP Operations – Slice, Dice, Roll-up, Drill-down and Pivot
+
+
+---
+
+Theory:
+
+Online Analytical Processing (OLAP) is a technology based on the multidimensional data model that enables fast, consistent, and interactive analysis of data. It is mainly used by managers and analysts to perform complex queries on large datasets. OLAP operations help explore data at different levels of detail and from multiple perspectives.
+
+1. Roll-up
+
+Roll-up increases the level of aggregation in a data cube. It can be performed in two ways:
+
+Climbing up a concept hierarchy (e.g., Day → Month → Year).
+
+Dimension reduction, where a dimension is removed to get a more summarized view of data.
+
+
+2. Drill-down
+
+Drill-down is the reverse of roll-up and provides more detailed data. It can be done by:
+
+Stepping down a concept hierarchy (e.g., Year → Month → Day).
+
+Adding a new dimension to increase data granularity.
+
+
+3. Slice
+
+Slice selects a single dimension value from the data cube and produces a smaller sub-cube.
+Example: Sales data for only the year 2024.
+
+4. Dice
+
+Dice selects multiple dimension values to create a sub-cube.
+Example: Sales for 2023–2024 AND Product = Electronics.
+
+5. Pivot
+
+Pivot rotates the data cube to provide a different view or orientation of dimensions.
+It helps reorganize rows and columns for easier analysis.
